@@ -57,16 +57,18 @@ ForgotPassword.belongsTo(User);
 User.hasMany(FilesDownloaded);
 FilesDownloaded.belongsTo(User);
 
+app.use((req,res)=>{
+  
+  console.log("urll>>>.",req.url);
+  res.sendFile(path.join(__dirname , `public/${req.url}`))
 
+})
 
 
 sequelize
   //.sync({ force: true })
   .sync()
   .then((result) => {
-    console.log(process.env.DB_NAME);
-    console.log(process.env.DB_USER_NAME);
-    console.log(process.env.DB_USER_PASSWORD)
     app.listen(process.env.PORT || 4000);
   })
   .catch((err) => {
