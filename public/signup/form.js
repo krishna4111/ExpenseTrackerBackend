@@ -13,7 +13,7 @@ async function submitEvent(e){
             email,
             password
         }
-    await  axios.post('http://16.170.239.252:4000/user/signup',detail)
+    await  axios.post('http://16.171.15.72:4000/user/signup',detail)
      //await  axios.post('http://localhost:4000/user/signup',detail)
         window.location.href="../login/login.html" //change the page on successful login
       showExpenses(detail);

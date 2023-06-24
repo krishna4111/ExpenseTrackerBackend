@@ -10,7 +10,7 @@ async function addFunction(e) {
       category,
     };
     const token = localStorage.getItem("token");
-  const response=  await axios.post("http://16.170.239.252:4000/expense/add-expense", obj, {headers: { 'Authorization': token } })
+  const response=  await axios.post("http://16.171.15.72:4000/expense/add-expense", obj, {headers: { 'Authorization': token } })
         
   showExpences(response.data.expense);
   } catch (err) {
@@ -49,7 +49,7 @@ addEventListener("DOMContentLoaded", async () => {
       showDownloadLinks();
     }
     page=1;
-    const getdata=await axios.get(`http://16.170.239.252:4000/expense/pagination?page=${page}&pageSize=${pageSize}` , {headers : {'Authorization':token }});
+    const getdata=await axios.get(`http://16.171.15.72:4000/expense/pagination?page=${page}&pageSize=${pageSize}` , {headers : {'Authorization':token }});
     getdata.data.allExpenses.forEach(ele=>{
       showExpences(ele);
     });
@@ -111,7 +111,7 @@ async function getProducts(page){
   try{
     const pageSize=localStorage.getItem('pagesize');
     const token=localStorage.getItem('token');
-    const getdata=await axios.get(`http://16.170.239.252:4000/expense/pagination?page=${page}&pageSize=${pageSize}` , {headers : {'Authorization':token }});
+    const getdata=await axios.get(`http://16.171.15.72:4000/expense/pagination?page=${page}&pageSize=${pageSize}` , {headers : {'Authorization':token }});
     const ul=document.getElementById('showing');
     ul.innerHTML="";
     const pagination=document.getElementById('pagination');
@@ -134,7 +134,7 @@ document.getElementById("rzp-button1").onclick = async function (e) {
     e.preventDefault();
     const token = localStorage.getItem("token");
     const response = await axios.get(
-      "http://16.170.239.252:4000/premium/purchase-premium",
+      "http://16.171.15.72:4000/premium/purchase-premium",
       { headers: { 'Authorization': token } }
     );
     //console.log(response);
@@ -146,7 +146,7 @@ document.getElementById("rzp-button1").onclick = async function (e) {
       //the below function will handle the success payment.
       'handler': async function (response) {
         await axios.post(
-          "http://16.170.239.252:4000/premium/update-transaction",
+          "http://16.171.15.72:4000/premium/update-transaction",
           {
             order_id: options.order_id,
             payment_id: response.razorpay_payment_id
@@ -204,7 +204,7 @@ function showDownloadLinks(){
       const downloadUrl=document.getElementById('downloadlinks');
       const token=localStorage.getItem('token');
     
-      const downloadLinks=await axios.get( "http://16.170.239.252:4000/user/show-downloadLink",{ headers:{'Authorization':token}});
+      const downloadLinks=await axios.get( "http://16.171.15.72:4000/user/show-downloadLink",{ headers:{'Authorization':token}});
   if(downloadLinks.data.url==[] || downloadLinks.data.url==''){
     const li = document.createElement('li');
     li.innerText = "No Downloaded Url";
@@ -249,7 +249,7 @@ function showLeaderBoard(){
   inputElement.onclick=async()=>{
     const token=localStorage.getItem('token');
   
-    const userLeaderBoardArray=await axios.get( "http://16.170.239.252:4000/premium/show-leaderboard",{ headers:{'Authorization':token}});
+    const userLeaderBoardArray=await axios.get( "http://16.171.15.72:4000/premium/show-leaderboard",{ headers:{'Authorization':token}});
     var leaderboardElem=document.getElementById('leaderboard');
     leaderboardElem.innerHTML+='<h1> Leader Board</h1>';
     userLeaderBoardArray.data.forEach((userDetail)=>{
@@ -283,7 +283,7 @@ function downloadExpense(){
     inputElement.onclick = async(eve) => {
       const token = localStorage.getItem('token');
   
-      const getUserDownloadedData = await axios.get('http://16.170.239.252:4000/user/download', { headers: { 'Authorization': token } });
+      const getUserDownloadedData = await axios.get('http://16.171.15.72:4000/user/download', { headers: { 'Authorization': token } });
       if(getUserDownloadedData.status===200){
         var a=document.createElement("a");
         a.href=getUserDownloadedData.data.fileURl;
@@ -317,7 +317,7 @@ function showExpences(obj) {
 async function deleteExpense(userId) {
   try{
     const token = localStorage.getItem("token");
-    await axios.delete(`http://16.170.239.252:4000/expense/delete-expense/${userId}`, { headers: { 'Authorization': token } })
+    await axios.delete(`http://16.171.15.72:4000/expense/delete-expense/${userId}`, { headers: { 'Authorization': token } })
       
         removeItemFromScreen(userId);
         location.reload();

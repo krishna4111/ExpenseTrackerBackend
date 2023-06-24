@@ -28,7 +28,7 @@ const forgotPassword=async(req,res)=>{
                 from:"dummy-001-001@outlook.com",
                 to:email,
                 subject:"This is about resetting your password",
-                text:`http://localhost:4000/password/resetpassword/${forgotpasswordcreate.id}`
+                text:`http://16.171.15.72:4000/password/resetpassword/${forgotpasswordcreate.id}`
             }
             
             mailTransport.sendMail(detail ,(err)=>{
@@ -68,7 +68,7 @@ const forgotPassword=async(req,res)=>{
                 <form action="/password/updatepassword/${forgotPasswordId}" method="get">
                     <label for="newpassword">Enter New password</label>
                     <input name="newpassword" type="password" required></input>
-                    <button  >reset password</button>
+                    <button>reset password</button>
                 </form>
             </html>`
             )}

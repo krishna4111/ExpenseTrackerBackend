@@ -7,7 +7,8 @@ async function submitEvent(e){
         const obj={
             email,password
         }
-        const check=await axios.post('http://16.170.239.252:4000/user/login',obj)
+        const check=await axios.post('http://16.171.15.72:4000/user/login',obj)
+        //const check=await axios.post('http://localhost:4000/user/login',obj)
         alert(check.data.message);
         localStorage.setItem('token',check.data.token);
 
@@ -15,6 +16,7 @@ async function submitEvent(e){
  
     }
     catch(err){
+        console.log('error occur in login');
         console.log(err.message);
         document.body.innerHTML +=`<div style="color:red;">${err.message}</div>`
     }
